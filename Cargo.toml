@@ -1,0 +1,9 @@
+[package]
+name = "simplepass"
+version = "0.1.0"
+authors = ["Thomas Hurst <tom@hur.st>"]
+
+[dependencies]
+rand = "0.5.5"
+structopt = "0.2.10"
+failure = "0.1.2"
