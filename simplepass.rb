@@ -17,7 +17,7 @@ OptionParser.new do |opts|
   end
 
   opts.on('-s SEPARATOR', '--separator SEPARATOR', 'Word separator') do |v|
-    Options.dict = v
+    Options.separator = v
   end
 
   opts.on('-d FILE', '--dictionary FILE', 'Dictionary to use') do |v|
