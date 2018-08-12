@@ -25,9 +25,6 @@ OptionParser.new do |opts|
   end
 end.parse!(ARGV)
 
-# Slurp the word list from the system dictionary,
-# chomping whitespace, rejecting empty lines and
-# removing duplicates.
 dict = begin
   File.readlines(Options.dict)
       .map(&:strip)
