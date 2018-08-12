@@ -29,15 +29,10 @@ end.parse!(ARGV)
 # chomping whitespace, rejecting empty lines and
 # removing duplicates.
 dict = begin
-  lines = File.readlines(Options.dict)
-  lines.each(&:strip!)
-  lines.reject!(&:empty?)
-  lines.uniq!
-  lines
-  # File.readlines(Options.dict)
-  #     .map(&:strip)
-  #     .reject(&:empty?)
-  #     .uniq
+  File.readlines(Options.dict)
+      .map(&:strip)
+      .reject(&:empty?)
+      .uniq
 rescue SystemCallError => e
   abort("#{Options.dict}: #{e.message}")
 end
