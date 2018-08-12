@@ -6,7 +6,7 @@ use rand::Rng;
 use structopt::StructOpt;
 
 #[derive(StructOpt)]
-#[structopt(name = "mkpass")]
+#[structopt(name = "simplepass")]
 struct Options {
     /// Length of the password
     #[structopt(short = "l", long = "length", default_value = "4")]
@@ -31,6 +31,8 @@ struct Options {
 }
 
 fn main() -> Result<(), String> {
+    use std::iter::repeat_with;
+
     let opts = Options::from_args();
 
     let dict = std::fs::read_to_string(&opts.dict)
@@ -47,15 +49,15 @@ fn main() -> Result<(), String> {
 
     let mut rng = rand::EntropyRng::new();
 
-    let mut sampler = std::iter::repeat_with(|| rng.choose(&dict).unwrap());
-
-    for _ in 0..opts.number {
-        let password = sampler
-            .by_ref()
+    let mkpass = || {
+        repeat_with(|| rng.choose(&dict).expect("dictionary shouldn't be empty"))
             .take(opts.length)
             .map(|s| *s)
             .collect::<Vec<&str>>()
-            .join(&opts.separator);
+            .join(&opts.separator)
+    };
+
+    for password in repeat_with(mkpass).take(opts.number) {
         println!("{}", password);
     }
 
