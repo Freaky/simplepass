@@ -23,7 +23,7 @@ struct Options {
     /// Dictionary to use
     #[structopt(
         short = "d",
-        long = "dict",
+        long = "dictionary",
         default_value = "/usr/share/dict/words",
         parse(from_os_str)
     )]
